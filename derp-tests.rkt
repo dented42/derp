@@ -1,6 +1,6 @@
 #lang racket
 
-(require "derivative-parsers-core.rkt")
+(require "derp-core.rkt")
 
 ; Examples
 

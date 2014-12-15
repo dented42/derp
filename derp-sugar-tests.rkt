@@ -46,8 +46,8 @@
  (parse '(< id >) (lang (list! '< ,'id '>)))
  (set '(id)))
 
-(let ([literal->language
-       (λ (lit) (token (λ (tok) (equal? tok 3))))])
+(parameterize ([current-literal->language
+                (λ (lit) (token (λ (tok) (equal? tok 3))))])
   (check-equal? 
    (parse '(3 3 3 3) (lang (★ 400)))
    (set '(3 3 3 3))))
@@ -55,7 +55,7 @@
 (define (numeric-literals lit)
   (match lit
     ['NUM    (token number?)]
-    [else    (literal->language lit)]))
+    [else    ((current-literal->language) lit)]))
   
 
 

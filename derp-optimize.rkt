@@ -1,6 +1,6 @@
 #lang racket
 
-(provide (all-defined-out))
+(provide ε? ∅? K parse/compact)
 
 (require (except-in "derp-core.rkt" ∅? ε?))
 (require "memoization.rkt")

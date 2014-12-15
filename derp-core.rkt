@@ -4,7 +4,12 @@
 (require "fixed-points.rkt")
 (require "lazy-structs.rkt")
 
-(provide (all-defined-out))
+(provide (struct-out ∅)
+         (struct-out ε)
+         (struct-out token)
+         δ ∪ ∘ ★ →
+         D
+         parse-null parse)
 
 ; Atomic parsers:
 (define-struct ∅      {})           ; empty set

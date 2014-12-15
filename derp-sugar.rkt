@@ -4,6 +4,13 @@
 
 (require "derp-core.rkt")
 
+; Specifies the default behavior for literals in the grammar:
+(define (default-literal->language lit)
+  (token (λ (t) (equal? t lit))))
+
+(define current-literal->language
+  (make-parameter default-literal->language))
+
 (define-syntax (lang stx)
   (syntax-case stx (∅ ε ε* quote token? 
                       empty eps eps*
@@ -12,9 +19,7 @@
                       list list! unquote
                       quasiquote
                       → --> $--> @--> >--> car)
-    [(f L)           (with-syntax ([literal->language 
-                                    (datum->syntax #'L 'literal->language)])
-                       #'(lang literal->language L))]
+    [(f L)           #'(lang (current-literal->language) L)]
     [(_ ll (∅))             #'(∅)]
     [(_ ll (ε))             #'(ε (set '()))]
     [(_ ll (ε v))           #'(ε (set v))]
@@ -81,13 +86,6 @@
                                 [else          #'atom]))]
     
     [else                 (error "syntax error in lang")]))
-
-; Specifies the default behavior for literals in the grammar:
-(define (default-literal->language lit)
-  (token (λ (t) (equal? t lit))))
-
-(define literal->language
-  (make-parameter default-literal->language))
 
 ; Tools for defining grammars:
 (define-syntax grammar-rule

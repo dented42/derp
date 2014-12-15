@@ -2,4 +2,4 @@
 
 (define version "0.1.0")
 
-(define scribblings '(("manual.scrbl" ())))
+(define scribblings '(("manual.scrbl" (multi-page))))

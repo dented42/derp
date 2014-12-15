@@ -86,11 +86,8 @@
 (define (default-literal->language lit)
   (token (λ (t) (equal? t lit))))
 
-(define literal->language default-literal->language)
-
-; Set the behavior for literals in the grammar:
-(define (set-literal->language! f)
-  (set! literal->language f))
+(define literal->language
+  (make-parameter default-literal->language))
 
 ; Tools for defining grammars:
 (define-syntax grammar-rule

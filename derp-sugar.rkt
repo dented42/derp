@@ -11,6 +11,8 @@
 (define current-literal->language
   (make-parameter default-literal->language))
 
+;;; these macros should all be made to use syntax-parse
+;;; add characters, bytestrings, and other literals to 'atom'
 (define-syntax (lang stx)
   (syntax-case stx (∅ ε ε* quote token? 
                       empty eps eps*
@@ -24,7 +26,7 @@
     [(_ ll (ε))             #'(ε (set '()))]
     [(_ ll (ε v))           #'(ε (set v))]
     [(_ ll (ε* S))          #'(ε S)]
-    [(_ ll (token? pred))   #'(token? pred)]
+    [(_ ll (token? pred))   #'(token? pred)] ; why is this token? and not token ?
     [(f ll (quote lit))     #'(ll 'lit)]
     
     [(f ll (empty))         #'(f ll (∅))]
@@ -83,7 +85,7 @@
                                 [(string? d)   #'(ll atom)]
                                 [(number? d)   #'(ll atom)]
                                 [(boolean? d)  #'(ll atom)]
-                                [else          #'atom]))]
+                                [else          #'atom]))] ; not sure I understand this line
     
     [else                 (error "syntax error in lang")]))
 

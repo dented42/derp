@@ -16,17 +16,6 @@
 
 @section{Languages & Grammars}
 
-@defform[(sandwich-factory maybe-name factory-component ...)
-         #:grammar
-         [(maybe-name (code:line)
-                      name)
-          (factory-component (code:line #:protein protein-expr)
-                             [vegetable vegetable-expr])]]{
-  Constructs a sandwich factory. If @racket[maybe-name] is provided,
-  the factory will be named. Each of the @racket[factory-component]
-  clauses adds an additional ingredient to the sandwich pipeline.
-}
-
 @defform[#:literals
          (∅ ε ε* quote token? empty eps eps* ∪ ★ + ? ∘ or rep rep+ opt seq list list! unquote
           quasiquote → --> $--> @--> >--> car)
@@ -47,12 +36,17 @@
           (empty-clause (∅)
                         (empty))
           (null-clause (ε maybe-result)
-                       (ε* result-set))
+                       (ε* result-set)
+                       (eps maybe-result)
+                       (eps* result-set))
           (token-clause (token? pred)
                         (#,(elem (racket quote)) quotable))
-          (union-clause TODO)
-          (seq-clause TODO)
-          (list-clause TODO)
+          (union-clause (∪ language-clause ...)
+                        (or language-clause ...))
+          (seq-clause (∘ language-clause ...)
+                      (seq language-clause ...))
+          (list-clause (list language-clause ...)
+                       TODO)
           (star-clause TODO)
           (many-clause TODO)
           (opt-clause TODO)

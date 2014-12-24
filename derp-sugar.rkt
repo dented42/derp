@@ -26,7 +26,7 @@
     [(_ ll (ε))             #'(ε (set '()))]
     [(_ ll (ε v))           #'(ε (set v))]
     [(_ ll (ε* S))          #'(ε S)]
-    [(_ ll (token? pred))   #'(token? pred)] ; why is this token? and not token ?
+    [(_ ll (token pred))   #'(token pred)]
     [(f ll (quote lit))     #'(ll 'lit)]
     
     [(f ll (empty))         #'(f ll (∅))]

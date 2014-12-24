@@ -17,48 +17,54 @@
 @section{Languages & Grammars}
 
 @defform[#:literals
-         (∅ ε ε* quote token? empty eps eps* ∪ ★ + ? ∘ or rep rep+ opt seq list list! unquote
-          quasiquote → --> $--> @--> >--> car)
+         (∅ ε ε* quote token empty eps eps* ∪ ★ + ? ∘ or rep rep+ opt seq list list! unquote
+          quasiquote → --> $--> |@-->| >--> car)
          (lang maybe-literal-handler language-clause)
          #:grammar
          [(maybe-literal-handler (code:line)
                                  literal-handler)
-          (language-clause empty-clause
-                           null-clause
-                           token-clause ;; this includes the (quote lit) form
-                           union-clause
-                           seq-clause
-                           list-clause
-                           star-clause
-                           many-clause
-                           opt-clause
-                           proc-clause)
-          (empty-clause (∅)
-                        (empty))
-          (null-clause (ε maybe-result)
-                       (ε* result-set)
-                       (eps maybe-result)
-                       (eps* result-set))
-          (token-clause (token? pred)
-                        (#,(elem (racket quote)) quotable))
-          (union-clause (∪ language-clause ...)
-                        (or language-clause ...))
-          (seq-clause (∘ language-clause ...)
-                      (seq language-clause ...))
-          (list-clause (list language-clause ...)
-                       TODO)
-          (star-clause TODO)
-          (many-clause TODO)
-          (opt-clause TODO)
-          (proc-clause TODO)
+          (language-clause (∅)
+                           (empty)
+                           (ε maybe-result)
+                           (ε* result-set)
+                           (eps maybe-result)
+                           (eps* result-set)
+                           (token pred)
+                           (#,(elem (racket quote)) literal)
+                           (∪ language-clause ...)
+                           (or language-clause ...)
+                           (∘ language-clause ...)
+                           (seq language-clause ...)
+                           (list language-clause ...)
+                           (list! maybe-unquote-language-clause ...)
+                           (quasiquote maybe-unquote-language-clause ...)
+                           (★ language-clause)
+                           (rep language-clause)
+                           (+ language-clause)
+                           (rep+ language-clause)
+                           (? language-clause maybe-result)
+                           (opt language-clause maybe-result)
+                           (→ language-clause procedure)
+                           (--> language-clause procedure)
+                           (|@-->| language-clause procedure)
+                           (>--> language-clause match-clause ...)
+                           ($--> language-clause expr ...))
           (maybe-result (code:line)
-                        result)]
+                        result)
+          (maybe-unquote-language-clause language-clause
+                                         (#,(elem (racket unquote)) language-clause))]
          #:contracts
          ([literal-handler (any? . -> . parser?)]
           [result any?]
           [result-set set?]
           [pred (any? . -> . boolean?)]
-          [quotable TODO])]{TODO: not really sure what this does.}
+          [procedure (any? . -> . any?)])]{TODO: not really sure what this does.
+                        
+                        The @racket[lang] form generates parsers for regular languages.
+                        
+                        @itemlist[@item{@racket[∅], @racket[empty] and stuff}
+                                  @item{@racket[ε], @racket[eps] and such}
+                                  @item{@racket[ε*], @racket[eps*] and so onsorry}]}
 
 @defform[(grammar-rule ...)]{TODO: not really sure what this does.}
 

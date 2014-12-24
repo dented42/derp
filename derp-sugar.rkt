@@ -14,7 +14,7 @@
 ;;; these macros should all be made to use syntax-parse
 ;;; add characters, bytestrings, and other literals to 'atom'
 (define-syntax (lang stx)
-  (syntax-case stx (∅ ε ε* quote token? 
+  (syntax-case stx (∅ ε ε* quote token
                       empty eps eps*
                       ∪ ★ + ? ∘ 
                       or rep rep+ opt seq
@@ -66,7 +66,7 @@
     [(f ll (? l v))           #'(∪ (f ll l) (ε* (set v)))]
     [(f ll (opt x ...))       #'(f ll (? x ...))]
     
-    [(f ll (car l))           #'(→ (f ll l) car)]
+    [(f ll (car l))           #'(→ (f ll l) car)] ; shouldn't there be a cdr ?
     
     
     [(f ll (→ l g))           #'(→ (f ll l) g)]

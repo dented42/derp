@@ -22,11 +22,11 @@
                       quasiquote
                       → --> $--> @--> >--> car)
     [(f L)           #'(lang (current-literal->language) L)]
-    [(_ ll (∅))             #'(∅)]
+    [(_ ll (∅))             #'(∅)] ; should ∅ and ε also be allowed to exist outside of parens?
     [(_ ll (ε))             #'(ε (set '()))]
     [(_ ll (ε v))           #'(ε (set v))]
     [(_ ll (ε* S))          #'(ε S)]
-    [(_ ll (token pred))   #'(token pred)]
+    [(_ ll (token pred))    #'(token pred)]
     [(f ll (quote lit))     #'(ll 'lit)]
     
     [(f ll (empty))         #'(f ll (∅))]

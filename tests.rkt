@@ -1,6 +1,6 @@
 #lang racket
 
-(require "derp-core.rkt")
+(require "core.rkt")
 
 ; Examples
 

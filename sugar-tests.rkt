@@ -2,8 +2,8 @@
 
 (require rackunit)
 
-(require "derp-core.rkt")
-(require "derp-sugar.rkt")
+(require "core.rkt")
+(require "sugar.rkt")
 
 (check-pred 
  (λ (L)

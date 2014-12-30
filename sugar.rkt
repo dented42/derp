@@ -2,7 +2,7 @@
 
 (provide (all-defined-out))
 
-(require "derp-core.rkt")
+(require "core.rkt")
 
 (define-syntax (lang stx)
   (syntax-case stx (∅ ε ε* quote token? 

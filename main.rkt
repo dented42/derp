@@ -1,9 +1,9 @@
 #lang racket
 
-(provide (all-from-out "derp-core.rkt")
-         (all-from-out "derp-optimize.rkt")
-         (all-from-out "derp-sugar.rkt"))
+(provide (all-from-out "core.rkt")
+         (all-from-out "optimize.rkt")
+         (all-from-out "sugar.rkt"))
 
-(require (except-in "derp-core.rkt" ∅? ε?)
-         "derp-optimize.rkt"
-         "derp-sugar.rkt")
+(require (except-in "core.rkt" ∅? ε?)
+         "optimize.rkt"
+         "sugar.rkt")
